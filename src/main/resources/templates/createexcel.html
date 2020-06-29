@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+<title>POI POC</title>
+</head>
+<body>
+<div th:replace="menu :: copy"></div>
+<br>
+<form th:action="@{/createexcel}" th:object="${createExcelForm}" method="post" enctype="multipart/form-data">
+<p th:if="${#fields.hasErrors('ratioSumValid')}" th:errors="*{ratioSumValid}" class="errorMessage"/>
+<p th:if="${#fields.hasErrors('fileSizeValid')}" th:errors="*{fileSizeValid}" class="errorMessage"/>
+Create EXCEL files
+<table style="table-layout:fixed;width:30%;word-wrap:break-word;">
+<colgroup>
+    <col style="width:50%;">
+    <col style="width:15%;">
+    <col style="width:35%;">
+</colgroup>
+<tbody>
+<tr>
+    <th>Sheet Number(per book)</th>
+    <td><input type="text" th:field="*{sheetNumber}" th:maxlength="2" th:size="3"/></td>
+    <td th:if="${#fields.hasErrors('sheetNumber')}" th:errors="*{sheetNumber}" class="errorMessage">sheetNumber Error</td>
+</tr>
+<tr>
+    <th>Raw Number(per sheet)</th>
+    <td><input type="text" th:field="*{rawNumber}" th:maxlength="2" th:size="3"/></td>
+    <td th:if="${#fields.hasErrors('rawNumber')}" th:errors="*{rawNumber}" class="errorMessage">sheetNumber Error</td>
+</tr>
+<tr>
+    <th>Column Number(per raw)</th>
+    <td><input type="text" th:field="*{columnNumber}" th:maxlength="2" th:size="3"/></td>
+    <td th:if="${#fields.hasErrors('columnNumber')}" th:errors="*{columnNumber}" class="errorMessage">sheetNumber Error</td>
+</tr>
+<tr>
+    <th>Cell String Length(per cell)</th>
+    <td><input type="text" th:field="*{cellStringLength}" th:maxlength="2" th:size="3"/></td>
+    <td th:if="${#fields.hasErrors('cellStringLength')}" th:errors="*{cellStringLength}" class="errorMessage">stringAverageLength Error</td>
+</tr>
+<tr>
+    <th>Numerical[0-9] data(%)</th>
+    <td><input type="text" th:field="*{numericalRatio}" th:maxlength="3" th:size="3"/></td>
+    <td th:if="${#fields.hasErrors('numericalRatio')}" th:errors="*{numericalRatio}" class="errorMessage">numericalRatio Error</td>
+</tr>
+<tr>
+    <th>Alphabet[a-Z] data(%)</th>
+    <td><input type="text" th:field="*{alphabetRatio}" th:maxlength="3" th:size="3"/></td>
+    <td th:if="${#fields.hasErrors('alphabetRatio')}" th:errors="*{alphabetRatio}" class="errorMessage">alphabetRatio Error</td>
+</tr>
+<tr>
+    <th>Kanji data(%)</th>
+    <td><input type="text" th:field="*{kanjiRatio}" th:maxlength="3" th:size="3"/></td>
+    <td th:if="${#fields.hasErrors('kanjiRatio')}" th:errors="*{kanjiRatio}" class="errorMessage">kanjiRatio Error</td>
+</tr>
+<tr>
+    <th>Image file(700K jpg) insert</th>
+    <td><input type="checkbox" name="insertImage" value="yes" th:field="*{insertImage}" /></td>
+    <td th:if="${#fields.hasErrors('insertImage')}" th:errors="*{insertImage}" class="errorMessage">Image insert Error</td>
+</tr>
+</tbody>
+</table>
+<div class="remark">
+Numerical data(%):The higher the value, the more compressive.<br>
+Alphabet data(%):less compressive than numerical.<br>
+Kanji data(%):Biggest data size(numeric*3).<br>
+</div>
+<br>
+<input type="submit" value="CREATE EXCEL FILE" class="submit"/>
+</form>
+<br>
+<div th:if="${hasResult}">
+Output File
+<table style="table-layout:fixed;width:30%;word-wrap:break-word;">
+<colgroup>
+    <col style="width:50%;">
+    <col style="width:50%;">
+</colgroup>
+<tbody>
+<tr><th>Output file</th><td th:text="${createExcelForm.filePath}"></td></tr>
+<tr><th>Total input data size(bytes)</th><td th:text="${createExcelForm.rawCellDataSize}"></td></tr>
+<tr><th>Ooxml file size(bytes)</th><td th:text="${createExcelForm.ooxmlSize}"></td></tr>
+<tr><th>Compress ratio(%)</th><td th:text="${createExcelForm.compressRatio}"></td></tr>
+<tr><th>Sheet Number(per book)</th><td th:text="${createExcelForm.sheetNumber}"></td></tr>
+<tr><th>Raw Number(per sheet)</th><td th:text="${createExcelForm.rawNumber}"></td></tr>
+<tr><th>Column Number(per raw)</th><td th:text="${createExcelForm.columnNumber}"></td></tr>
+<tr><th>Cell String Length(per cell)</th><td th:text="${createExcelForm.cellStringLength}"></td></tr>
+<tr><th>Numerical data(%)</th><td th:text="${createExcelForm.numericalRatio}"></td></tr>
+<tr><th>Alphabet data(%)</th><td th:text="${createExcelForm.alphabetRatio}"></td></tr>
+<tr><th>Kanji data(%)</th><td th:text="${createExcelForm.kanjiRatio}"></td></tr>
+<tr><th>Image file(700K jpg) insert</th><td th:text="${createExcelForm.insertImage}"></td></tr>
+</tbody>
+</table>
+<br>
+<form th:action="@{/download/__${createExcelForm.filePath}__}" th:object="${createExcelForm}" method="get">
+<input type="submit" value="FILE DOWNLOAD" class="submit"/>
+</form>
+</div>
+</body>
+</html>

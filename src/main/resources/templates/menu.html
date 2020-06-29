@@ -1,0 +1,25 @@
+<div th:fragment="copy" class="navbar">
+  <a href="/">TOP</a>
+  <div class="dropdown">
+    <button class="dropbtn">POI POC
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/exceldiffbyupload">Excel diff(file upload version)</a>
+      <a href="/exceldiffbypath">Excel diff(absolute path version)</a>
+      <a href="/usedom" target="_blank">Use DOM(default)</a>
+      <a href="/usesax" target="_blank">Use SAX</a>
+      <a href="/usesync" target="_blank">Excel diff by sync task(default)</a>
+      <a href="/useasync" target="_blank">Excel diff by async task</a>
+      <a href="/createexcel">Create test excel data</a>
+    </div>
+  </div>
+    <div class="dropdown">
+    <button class="dropbtn">ADMIN
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/systemenvironment">System environment</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script th:src="@{/js/lib/jquery.min.js}"></script>
+<script th:src="@{/js/lib/codemirror.min.js}"></script>
+<link th:href="@{/css/codemirror.css}" rel="stylesheet" type="text/css" />
+<script th:src="@{/js/lib/searchcursor.min.js}"></script>
+<script th:src="@{/js/lib/mergely.js}"></script> 
+<link th:href="@{/css/mergely.css}" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#mergely').mergely({
+		license: 'lgpl',
+		cmsettings: {
+			readOnly: true
+		},
+		lhs: function(setValue) {
+			setValue('the quick red fox\njumped over the hairy dog');
+		},
+		rhs: function(setValue) {
+			setValue('the quick brown fox\njumped over the lazy dog');
+		}
+	});
+});
+</script>
+</head>
+<body>
+<div class="mergely-full-screen-8">
+  <div class="mergely-resizer">
+    <div id="mergely"></div>
+  </div>
+</div>
+</body>
+</html>

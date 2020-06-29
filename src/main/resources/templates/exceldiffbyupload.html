@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+<title>POI POC</title>
+</head>
+<body>
+<div th:replace="menu :: copy"></div>
+<br>
+<form th:action="@{/exceldiffbyupload}" th:object="${excelDiffByUploadForm}" method="post" enctype="multipart/form-data">
+Upload EXCEL files
+<table style="table-layout:fixed;width:30%;word-wrap:break-word;">
+<colgroup>
+    <col style="width:20%;">
+    <col style="width:50%;">
+    <col style="width:30%;">
+</colgroup>
+<tbody>
+<tr><th>old file</th><td><input type="file" th:field="*{oldfile}" /></td><td th:if="${#fields.hasErrors('oldfile')}" th:errors="*{oldfile}" class="errorMessage">File Error</td></tr>
+<tr><th>new file</th><td><input type="file" th:field="*{newfile}" /></td><td th:if="${#fields.hasErrors('newfile')}" th:errors="*{newfile}" class="errorMessage">File Error</td></tr>
+</tbody>
+</table>
+<br>
+<input type="submit" value="UPLOAD and DIFF" class="submit"/>
+</form>
+<br>
+<div th:if="${hasResult}">
+Input File
+<table>
+<tbody>
+<tr><th>old file</th><th>new file</th></tr>
+<tr><td th:text="${excelDiffByUploadForm.oldFileName}"/><td th:text="${excelDiffByUploadForm.newFileName}"/></tr>
+</tbody>
+</table>
+<br>
+<div th:if="${!excelDiffByUploadForm.hasDiffSheet and !excelDiffByUploadForm.hasDiffCell and !excelDiffByUploadForm.hasDiffMacro}">no difference between two files</div>
+
+
+<div th:if="${excelDiffByUploadForm.hasDiffSheet}">
+WorkSheet difference
+<table>
+<tbody>
+<tr><th>old file</th><th>new file</th><th>WorkSheet does not exit</th></tr>
+<tr th:each="diffSheetItem : ${excelDiffByUploadForm.diffSheetItemList}">
+    <td th:text="${diffSheetItem.oldFileName}"/>
+    <td th:text="${diffSheetItem.newFileName}"/>
+    <td th:text="${diffSheetItem.sheetName}"/>    
+</tr>
+</tbody>
+</table>
+<br>
+</div>
+
+<div class="width100" th:if="${!excelDiffByUploadForm.hasDiffSheet}">
+There is no sheet difference.
+</div>
+
+<div class="width100" th:if="${excelDiffByUploadForm.hasDiffCell}">
+Cell difference
+<table style="table-layout:fixed;width:100%;word-wrap:break-word;">
+<colgroup>
+    <col style="width:13%;">
+    <col style="width:3%;">
+    <col style="width:42%;">
+    <col style="width:42%;">
+</colgroup>
+<tbody>
+<tr><th>WorkSheet</th><th>cell</th><th>old value</th><th>new value</th></tr>
+<tr th:each="diffCellItem : ${excelDiffByUploadForm.diffCellItemList}">
+    <td th:text="${diffCellItem.sheetName}"/>
+    <td th:text="${diffCellItem.CellName}"/>
+    <td th:text="${diffCellItem.oldHTMLCellValue}"/>
+    <td th:utext="${diffCellItem.newHTMLCellValue}"/>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="width100" th:if="${!excelDiffByUploadForm.hasDiffCell}">
+There is no cell difference.
+</div>
+
+<br>
+<div class="width100" th:if="${excelDiffByUploadForm.hasDiffMacro}">
+Macro difference
+<table style="table-layout:fixed;width:100%;word-wrap:break-word;">
+<colgroup>
+    <col style="width:50%;">
+    <col style="width:50%;">
+</colgroup>
+<tbody>
+<tr><th>old macro</th><th>new macro</th></tr>
+<tr th:each="diffMacroItem : ${excelDiffByUploadForm.diffMacroItemList}">
+    <td valign="top" th:utext="${diffMacroItem.oldHTMLMacroValue}"/>
+    <td valign="top" th:utext="${diffMacroItem.newHTMLMacroValue}"/>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

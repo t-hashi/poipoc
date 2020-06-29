@@ -1,0 +1,153 @@
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  padding: 12px 14px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 14px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 12px 14px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #ABB2B9;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 14px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+body {
+    margin: 20px;
+}
+.fielderrMsg {
+  color: red;
+}
+.remark {
+  font-size:12px;
+  color: blue;
+}
+.trim {
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+}
+.globalerrMsg {
+  color: blue;
+}
+.editNewInline {
+  color: red;
+  background-color: #FFFF00;
+}
+.editOldInline {
+  color: blue;
+  background-color: #AAAAAA;
+}
+.errorMessage {
+  border: 0px solid #FFFFFF;
+  background-color: #FFFFFF;	
+  color: red;
+}
+
+table {
+  font-size:13px;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+}
+
+th {
+  font-size:14px;
+  color: white;
+  background-color: #003366;
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 4px;
+}
+
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 4px;
+}
+
+tr:nth-child(even) {
+  background-color: #F5F5F5;
+}
+
+.submit {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	background-color:#ededed;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.submit:hover {
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	background-color:#dfdfdf;
+}
+.submit:active {
+	position:relative;
+	top:1px;
+}
+
+        

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+<title>POI POC</title>
+</head>
+<body>
+<div th:replace="menu :: copy"></div>
+<br>
+System Environment
+<table style="table-layout:fixed;width:100%;word-wrap:break-word;">
+<colgroup>
+    <col style="width:5%;">
+    <col style="width:17%;">
+    <col style="width:78%;">
+</colgroup>
+<tbody>
+<tr><th>category</th><th>variable name</th><th>value</th></tr>
+<tr th:each="systemEnvironmentItem : ${systemEnvironmentForm.systemEnvironmentItemList}">
+    <td valign="top" th:text="${systemEnvironmentItem.getCategory()}"/>
+    <td valign="top" th:text="${systemEnvironmentItem.getVariableName()}"/>
+    <td valign="top" th:text="${systemEnvironmentItem.getValue()}"/>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
